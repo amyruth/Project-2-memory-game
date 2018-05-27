@@ -15,60 +15,66 @@ let openCards = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
 }
 
 //clears current board, shuffles card types and creates new cards for board
 function makeNewCards(cardDeck) {
-  cardDeck.forEach(function (card) {
-    let li = document.createElement('li');
-    li.className = 'card';
-    let icon = document.createElement('i');
-    icon.className = 'fa fa-' + card;
-    li.appendChild(icon);
-    frag.appendChild(li);
-  });
+    cardDeck.forEach(function (card) {
+        let li = document.createElement('li');
+        li.className = 'card';
+        let icon = document.createElement('i');
+        icon.className = 'fa fa-' + card;
+        li.appendChild(icon);
+        frag.appendChild(li);
+    });
 };
 
 function newBoard() {
-  while (deck.firstChild) {
-    deck.removeChild(deck.firstChild);
-  };
+    while (deck.firstChild) {
+        deck.removeChild(deck.firstChild);
+    };
 
-  shuffle(cards);
-  makeNewCards(cards);
-  deck.appendChild(frag);
-  console.log(deck);
+    shuffle(cards);
+    makeNewCards(cards);
+    deck.appendChild(frag);
+    console.log(deck);
 };
 
-function showCard(targetCard){
-  if(targetCard.target && targetCard.target.nodeName === 'LI'){
-    targetCard.target.classList.add('open', 'show');
-  }
+function showCard(targetCard) {
+    if (targetCard.target && targetCard.target.nodeName === 'LI') {
+        targetCard.target.classList.add('open', 'show');
+    }
 };
+
+function captureCards(card) {
+    openCards.push(card.target.firstChild.className);
+    console.log(openCards);
+}
 
 //sets up board when page first opens
 newBoard();
 
 // ********Event Listeners********
 
-restartButton.addEventListener('click', function(e){
-  newBoard();
+restartButton.addEventListener('click', function (e) {
+    newBoard();
 });
 
-deck.addEventListener('click', function(e){
-  console.log('click');
-  showCard(e);
+deck.addEventListener('click', function (e) {
+    console.log('click');
+    showCard(e);
+    captureCards(e);
 }, false);
 
 //TODO  card compare in click even or in a separate section?
