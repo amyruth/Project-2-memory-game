@@ -4,7 +4,8 @@
 const cards = ['leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o', 'leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o'];
 let deck = document.querySelector('.deck');
 let frag = document.createDocumentFragment();
-
+let restartButton = document.querySelector('.restart');
+let openCards = [];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -50,17 +51,28 @@ function newBoard() {
   console.log(deck);
 };
 
+function showCard(targetCard){
+  if(targetCard.target && targetCard.target.nodeName === 'LI'){
+    targetCard.target.classList.add('open', 'show');
+  }
+};
+
+//sets up board when page first opens
 newBoard();
 
+// ********Event Listeners********
 
-//event handler for board
+restartButton.addEventListener('click', function(e){
+  newBoard();
+});
+
 deck.addEventListener('click', function(e){
- console.log('click');
- if(e.target && e.target.nodeName === 'LI'){
-   e.target.classList.add('open', 'show');
- }
-
+  console.log('click');
+  showCard(e);
 }, false);
+
+//TODO  card compare in click even or in a separate section?
+
 
 
 
