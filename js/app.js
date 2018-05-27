@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cards = ['leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o', 'leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o'];
 
 /*
  * Display the cards on the page
@@ -25,6 +25,23 @@ function shuffle(array) {
     return array;
 }
 
+shuffle(cards);
+console.log(cards);
+
+let deck = document.querySelector('.deck');
+
+while(deck.firstChild){
+	deck.removeChild(deck.firstChild);
+}
+
+console.log(deck);
+console.log(deck);
+cards.forEach(function(card){
+	let icon = '<li class="card"><i class= "fa fa-' + card + '"></i></li>';
+	console.log(icon);
+	
+});
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +53,4 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
