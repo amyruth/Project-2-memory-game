@@ -14,44 +14,44 @@ let frag = document.createDocumentFragment();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-	var currentIndex = array.length,
-	temporaryValue, randomIndex;
-	
-	while (currentIndex !== 0) {
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
-		temporaryValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = temporaryValue;
-	}	
-	return array;
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
 }
 
 //clears current board, shuffles card types and creates new cards for board
+function makeNewCards(cardDeck) {
+  cardDeck.forEach(function (card) {
+    let li = document.createElement('li');
+    li.className = 'card';
+    let icon = document.createElement('i');
+    icon.className = 'fa fa-' + card;
+    li.appendChild(icon);
+    frag.appendChild(li);
+  });
+};
 
 function newBoard() {
-	while (deck.firstChild) {
-		deck.removeChild(deck.firstChild);
-	};
+  while (deck.firstChild) {
+    deck.removeChild(deck.firstChild);
+  };
 
-	shuffle(cards);
-	console.log(cards);
-	cards.forEach(function (card){
-		let li = document.createElement('li');
-		li.className = 'card';
-		let icon = document.createElement('i');
-		icon.className = 'fa fa-' + card;
-		li.appendChild(icon);
-		frag.appendChild(li);
-	});
-	deck.appendChild(frag);
-}
+  shuffle(cards);
+  makeNewCards(cards);
+  deck.appendChild(frag);
+  console.log(deck);
+};
 
 newBoard();
-// console.log(newCards);
-// for(let i = 0; i <= newCards.length; i++){
-// 	deck.append(newCards[i]);
-// };
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
