@@ -2,6 +2,8 @@
  * Create a list that holds all of your cards
  */
 const cards = ['leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o', 'leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o'];
+let deck = document.querySelector('.deck');
+let frag = document.createDocumentFragment();
 
 /*
  * Display the cards on the page
@@ -12,37 +14,44 @@ const cards = ['leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', '
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-shuffle(cards);
-console.log(cards);
-
-let deck = document.querySelector('.deck');
-
-while(deck.firstChild){
-	deck.removeChild(deck.firstChild);
-}
-
-console.log(deck);
-console.log(deck);
-cards.forEach(function(card){
-	let icon = '<li class="card"><i class= "fa fa-' + card + '"></i></li>';
-	console.log(icon);
+	var currentIndex = array.length,
+	temporaryValue, randomIndex;
 	
-});
+	while (currentIndex !== 0) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}	
+	return array;
+}
 
+//clears current board, shuffles card types and creates new cards for board
 
+function newBoard() {
+	while (deck.firstChild) {
+		deck.removeChild(deck.firstChild);
+	};
+
+	shuffle(cards);
+	console.log(cards);
+	cards.forEach(function (card){
+		let li = document.createElement('li');
+		li.className = 'card';
+		let icon = document.createElement('i');
+		icon.className = 'fa fa-' + card;
+		li.appendChild(icon);
+		frag.appendChild(li);
+	});
+	deck.appendChild(frag);
+}
+
+newBoard();
+// console.log(newCards);
+// for(let i = 0; i <= newCards.length; i++){
+// 	deck.append(newCards[i]);
+// };
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -53,4 +62,3 @@ cards.forEach(function(card){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
