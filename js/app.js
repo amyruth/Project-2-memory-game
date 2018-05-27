@@ -6,6 +6,8 @@ let deck = document.querySelector('.deck');
 let frag = document.createDocumentFragment();
 let restartButton = document.querySelector('.restart');
 let openCards = [];
+let moves = document.querySelector('.moves');
+let counter = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -41,6 +43,8 @@ function makeNewCards(cardDeck) {
 };
 
 function newBoard() {
+    counter = 0;
+    moves.textContent = counter;
     while (deck.firstChild) {
         deck.removeChild(deck.firstChild);
     };
@@ -57,10 +61,22 @@ function showCard(targetCard) {
     }
 };
 
-function captureCards(card) {
-    openCards.push(card.target.firstChild.className);
-    console.log(openCards);
+function compareCards(arr) {
+    if (openCards[0] === openCards[1]){
+
+    }
 }
+
+function captureCards(card) {
+    openCards.push(card.target);
+    console.log(openCards);
+    if(openCards.length === 2){
+        counter += 1;
+        moves.textContent = counter;
+        compareCards(openCards);
+    }
+}
+
 
 //sets up board when page first opens
 newBoard();
@@ -78,11 +94,6 @@ deck.addEventListener('click', function (e) {
 }, false);
 
 //TODO  card compare in click even or in a separate section?
-
-
-
-
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
