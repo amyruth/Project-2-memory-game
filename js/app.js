@@ -52,6 +52,20 @@ function newBoard() {
 
 newBoard();
 
+
+//event handler for board
+deck.addEventListener('click', function(e){
+ console.log('click');
+ if(e.target && e.target.nodeName === 'LI'){
+   e.target.classList.add('open', 'show');
+ }
+
+}, false);
+
+
+
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
