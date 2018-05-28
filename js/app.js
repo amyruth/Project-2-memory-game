@@ -54,7 +54,18 @@ resetButton.addEventListener('click', function(){
 	newBoard();
 });
 
-
+function compare(cardList){
+	if(cardList[0] === cardList[1]){
+		cardList.forEach(function(card){
+			card.classList.add('match');
+		});
+	}else{
+		cardList.forEach(function(card){
+			card.classList.remove('show', 'open');
+		});
+		cardList = [];
+	}
+};
 deck.querySelectorAll('li').forEach(function(card){
 	card.addEventListener('click', function(e){
 		let clickedCard = this;
@@ -62,35 +73,10 @@ deck.querySelectorAll('li').forEach(function(card){
 			clickedCard.classList.add('show', 'open');
 			console.log(clickedCard);
 			openCards.push(clickedCard);
-		}else{
-			clickedCard.classList.add('show', 'open');
-			console.log(clickedCard);
-			openCards.push(clickedCard);
-		}
+		}else if(openCards.length === 2){
+			console.log(openCards);
 		
-	});
-});
-
-
-
-
-
-// let li = document.querySelectorAll('li');
-// li.addEventListener('click', function(e){
-// 	e.preventDefault();
-// 	console.log('clicked card');
-// }, false);
-
-
-
-
-
-
-
-
-
-
-
+		});
 
 
 
