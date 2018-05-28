@@ -1,11 +1,8 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = ['fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o', 'fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o'];
-let deck = document.querySelector('.deck');
-let frag = document.createDocumentFragment();
-let restartButton = document.querySelector('.restart');
-let openCards = [];
+
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -15,81 +12,19 @@ let openCards = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
+	var currentIndex = array.length,
+		temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-    return array;
-}
-
-//clears current board, shuffles card types and creates new cards for board
-function makeNewCards(cardDeck) {
-    cardDeck.forEach(function (card) {
-        let li = document.createElement('li');
-        li.className = 'card';
-        let icon = document.createElement('i');
-        icon.className = card;
-        li.appendChild(icon);
-        frag.appendChild(li);
-    });
-};
-
-function newBoard() {
-    while (deck.firstChild) {
-        deck.removeChild(deck.firstChild);
-    };
-    shuffle(cards);
-    makeNewCards(cards);
-    deck.appendChild(frag);
-    console.log(deck);
-};
-
-function captureCard(card){
-	if(openCards.length === 1){
-		openCards.push(card.target);
-		if(card.target.innerHTML === openCards[0].innerHTML){
-			
-		}
-	}else{
-		openCards.push(card.target);
+	while (currentIndex !== 0) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
 	}
-};
 
-function showCard(event) {
-    if (event.target && event.target.nodeName === 'LI') {
-		event.target.classList.add('open', 'show');
-		captureCard(event);
-		console.log(openCards);	
-    }
-};
-
-
-//sets up board when page first opens
-newBoard();
-
-// ********Event Listeners********
-
-restartButton.addEventListener('click', function () {
-    newBoard();
-});
-
-deck.addEventListener('click', function (e) {
-	console.log('click');
-	console.log(e);
-	showCard(e);
-}, false);
-
-//TODO  card compare in click even or in a separate section?
-
-
-
-
+	return array;
+}
 
 
 /*
