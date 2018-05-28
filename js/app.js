@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = ['leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o', 'leaf', 'diamond', 'bomb', 'bicycle', 'bolt', 'cube', 'anchor', 'paper-plane-o'];
+const cards = ['fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o', 'fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o'];
 let deck = document.querySelector('.deck');
 let frag = document.createDocumentFragment();
 let restartButton = document.querySelector('.restart');
@@ -34,7 +34,7 @@ function makeNewCards(cardDeck) {
         let li = document.createElement('li');
         li.className = 'card';
         let icon = document.createElement('i');
-        icon.className = 'fa fa-' + card;
+        icon.className = card;
         li.appendChild(icon);
         frag.appendChild(li);
     });
@@ -44,44 +44,45 @@ function newBoard() {
     while (deck.firstChild) {
         deck.removeChild(deck.firstChild);
     };
-
     shuffle(cards);
     makeNewCards(cards);
     deck.appendChild(frag);
     console.log(deck);
 };
 
-function showCard(targetCard) {
-    if (targetCard.target && targetCard.target.nodeName === 'LI') {
-        targetCard.target.classList.add('open', 'show');
-        openCards.push(targetCard.target.outerHTML);
-		console.log(openCards);
-		if(openCards.length === 2){
-			return;
+function captureCard(card){
+	if(openCards.length === 1){
+		openCards.push(card.target);
+		if(card.target.innerHTML === openCards[0].innerHTML){
+			
 		}
-		setTimeout(compareCards(openCards), 4000);
-		
+	}else{
+		openCards.push(card.target);
+	}
+};
+
+function showCard(event) {
+    if (event.target && event.target.nodeName === 'LI') {
+		event.target.classList.add('open', 'show');
+		captureCard(event);
+		console.log(openCards);	
     }
 };
 
-function compareCards(arr) {
-	if(arr[0].firstChild.className === arr[1].firstChild.className){
-		arr[0].classList.add("match");
-		arr[1].classList.add('match');
-	}
-}
+
 //sets up board when page first opens
 newBoard();
 
 // ********Event Listeners********
 
-restartButton.addEventListener('click', function (e) {
+restartButton.addEventListener('click', function () {
     newBoard();
 });
 
 deck.addEventListener('click', function (e) {
-    console.log('click');
-    showCard(e);
+	console.log('click');
+	console.log(e);
+	showCard(e);
 }, false);
 
 //TODO  card compare in click even or in a separate section?
