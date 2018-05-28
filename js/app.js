@@ -3,7 +3,6 @@ let deck = document.querySelector('.deck');
 let resetButton = document.querySelector('.restart');
 let openCards = [];
 let frag = document.createDocumentFragment();
-let card1, card2;
 let moveCounter = 0;
 let moves = document.getElementsByClassName('moves');
 let matches = 0;
@@ -58,7 +57,17 @@ resetButton.addEventListener('click', function(){
 
 deck.querySelectorAll('li').forEach(function(card){
 	card.addEventListener('click', function(e){
-		console.log(this.outerHTML);
+		let clickedCard = this;
+		if(openCards.length < 2){
+			clickedCard.classList.add('show', 'open');
+			console.log(clickedCard);
+			openCards.push(clickedCard);
+		}else{
+			clickedCard.classList.add('show', 'open');
+			console.log(clickedCard);
+			openCards.push(clickedCard);
+		}
+		
 	});
 });
 
