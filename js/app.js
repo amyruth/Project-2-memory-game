@@ -3,7 +3,10 @@ let deck = document.querySelector('.deck');
 let resetButton = document.querySelector('.restart');
 let openCards = [];
 let frag = document.createDocumentFragment();
-
+let card1, card2;
+let moveCounter = 0;
+let moves = document.getElementsByClassName('moves');
+let matches = 0;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 	var currentIndex = array.length,
@@ -43,16 +46,31 @@ function newBoard() {
 	console.log(deck);
 };
 
+
 //when page loads for the first time a new board is created
 newBoard();
 
 //make a click handler for the reset button
 resetButton.addEventListener('click', function(){
 	newBoard();
-})
+});
+
+
+deck.querySelectorAll('li').forEach(function(card){
+	card.addEventListener('click', function(e){
+		console.log(this.outerHTML);
+	});
+});
 
 
 
+
+
+// let li = document.querySelectorAll('li');
+// li.addEventListener('click', function(e){
+// 	e.preventDefault();
+// 	console.log('clicked card');
+// }, false);
 
 
 
