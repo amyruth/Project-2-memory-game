@@ -1,8 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
-
-
+const cards = ['fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o', 'fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o'];
+let deck = document.querySelector('.deck');
+let restartButton = document.querySelector('.restart');
+let openCards = [];
+let frag = document.createDocumentFragment();
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -22,11 +25,35 @@ function shuffle(array) {
 		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = temporaryValue;
 	}
-
 	return array;
 }
 
+//clears current board, shuffles card types and creates new cards for board
+function makeNewCards(cardDeck) {	
+	cardDeck.forEach(function (card) {
+		let li = document.createElement('li');
+		li.className = 'card';
+		let icon = document.createElement('i');
+		icon.className = card;
+		li.appendChild(icon);
+		frag.appendChild(li);	
+	});
+	console.log(frag);
+	return frag;
+};
 
+function newBoard() {
+	while (deck.firstChild) {
+		deck.removeChild(deck.firstChild);
+	};
+	shuffle(cards);
+	makeNewCards(cards);
+	deck.appendChild(frag);
+	console.log(deck);
+};
+
+
+newBoard();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
