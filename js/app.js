@@ -1,17 +1,8 @@
-/*
- * Create a list that holds all of your cards
- */
 const cards = ['fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o', 'fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o'];
 let deck = document.querySelector('.deck');
-let restartButton = document.querySelector('.restart');
+let resetButton = document.querySelector('.restart');
 let openCards = [];
 let frag = document.createDocumentFragment();
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -52,8 +43,33 @@ function newBoard() {
 	console.log(deck);
 };
 
-
+//when page loads for the first time a new board is created
 newBoard();
+
+//make a click handler for the reset button
+resetButton.addEventListener('click', function(){
+	newBoard();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
