@@ -53,25 +53,27 @@ resetButton.addEventListener('click', function () {
 	newBoard();
 });
 
+// TODO: Make sure 3rd click's not allowed
+
 function compareCards(cardList) {
 	console.log(cardList);
 	let search = cardList[0].innerHTML;
 	if(cardList[1].innerHTML.indexOf(search) !== -1){
 		cardList.forEach(function(card){
-			card.classList.add('match');			
+			card.classList.add('match');		
 			console.log('match');
 		});
+		cardList.length = 0;
 	}else{
 		cardList.forEach(function(card){
-			card.classList.remove('show', 'open');		
+			card.classList.remove('show', 'open');
 			console.log('no match');
 		});
+		cardList.length = 0;
 	}
 };
 
-
-//adds clicked cards to array for comparison
-function captureCard(card, cardList) {
+function captureAndCompare(card, cardList) {
 	if (cardList.length < 3) {
 		card.classList.add('show', 'open');
 		cardList.push(card);
@@ -79,29 +81,25 @@ function captureCard(card, cardList) {
 	}
 	if(cardList.length === 2){
 		setTimeout(function(){
-			compareCards(cardList)
+			compareCards(cardList);			
 		}
-		, 1000);
+		, 1500);
 	}
 };
 
-
-
 deck.querySelectorAll('li').forEach(function (card) {
 	card.addEventListener('click', function (e) {
-		let clickedCard = this;
-		captureCard(clickedCard, openCards);
+		if(openCards.length === 2){
+			return;
+		}else{
+			let clickedCard = this;
+			captureAndCompare(clickedCard, openCards);
+		}
+		
 		
 		// NEED TO CLEAR ARRAY
 	}); //end event listener
 }, false); //end forEach
-
-// if(openCards.length === 2){
-// 	console.log('comparing time');
-// 	setTimeout(compare(openCards), 1000);
-// }
-
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
