@@ -4,6 +4,7 @@ let resetButton = document.querySelector('.restart');
 let openCards = [];
 let frag = document.createDocumentFragment();
 let moveCounter = 0;
+let cardCounter = 0;
 let moves = document.getElementsByClassName('moves');
 let matches = 0;
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -22,16 +23,15 @@ function shuffle(array) {
 }
 
 //clears current board, shuffles card types and creates new cards for board
-function makeNewCards(cardDeck) {	
+function makeNewCards(cardDeck) {
 	cardDeck.forEach(function (card) {
 		let li = document.createElement('li');
 		li.className = 'card';
 		let icon = document.createElement('i');
 		icon.className = card;
 		li.appendChild(icon);
-		frag.appendChild(li);	
+		frag.appendChild(li);
 	});
-	console.log(frag);
 	return frag;
 };
 
@@ -45,41 +45,61 @@ function newBoard() {
 	console.log(deck);
 };
 
-
 //when page loads for the first time a new board is created
 newBoard();
 
 //make a click handler for the reset button
-resetButton.addEventListener('click', function(){
+resetButton.addEventListener('click', function () {
 	newBoard();
 });
 
-function compare(cardList){
-	if(cardList[0] === cardList[1]){
+function compareCards(cardList) {
+	console.log(cardList);
+	let search = cardList[0].innerHTML;
+	if(cardList[1].innerHTML.indexOf(search) !== -1){
 		cardList.forEach(function(card){
-			card.classList.add('match');
+			card.classList.add('match');			
+			console.log('match');
 		});
 	}else{
 		cardList.forEach(function(card){
-			card.classList.remove('show', 'open');
+			card.classList.remove('show', 'open');		
+			console.log('no match');
 		});
-		cardList = [];
 	}
 };
-deck.querySelectorAll('li').forEach(function(card){
-	card.addEventListener('click', function(e){
+
+
+//adds clicked cards to array for comparison
+function captureCard(card, cardList) {
+	if (cardList.length < 3) {
+		card.classList.add('show', 'open');
+		cardList.push(card);
+		console.log(cardList);
+	}
+	if(cardList.length === 2){
+		setTimeout(function(){
+			compareCards(cardList)
+		}
+		, 1000);
+	}
+};
+
+
+
+deck.querySelectorAll('li').forEach(function (card) {
+	card.addEventListener('click', function (e) {
 		let clickedCard = this;
-		if(openCards.length < 2){
-			clickedCard.classList.add('show', 'open');
-			console.log(clickedCard);
-			openCards.push(clickedCard);
-		}else if(openCards.length === 2){
-			console.log(openCards);
+		captureCard(clickedCard, openCards);
 		
-		});
+		// NEED TO CLEAR ARRAY
+	}); //end event listener
+}, false); //end forEach
 
-
-
+// if(openCards.length === 2){
+// 	console.log('comparing time');
+// 	setTimeout(compare(openCards), 1000);
+// }
 
 
 
