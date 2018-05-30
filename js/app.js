@@ -53,15 +53,24 @@ function compareCards(cardList) {
 	}
 };
 
+function displayMoves(cardlist){
+	if(cardlist.length === 2){
+		moveCounter += 1;
+		moves.textContent = moveCounter;
+	}
+};
+
 function captureCards(card, cardList) {
 	if (cardList.length < 3) {
 		card.classList.add('show', 'open');
 		cardList.push(card);
 		console.log(cardList);
 	}
+
 	if(cardList.length === 2){
-		moveCounter += 1;
-		moves.textContent = moveCounter;
+		displayMoves(cardList);
+		// moveCounter += 1;
+		// moves.textContent = moveCounter;
 		console.log(`moves: ${moveCounter}`);
 		setTimeout(function(){
 			compareCards(cardList);			
@@ -89,13 +98,12 @@ function newBoard() {
 		deck.removeChild(deck.firstChild);
 	};
 	moveCounter = 0;
+	moves.textContent = 0;
 	shuffle(cards);
 	makeNewCards(cards);
 	deck.appendChild(frag);
 	console.log(deck);
-	cardListener(deck, openCards);
-	
-	
+	cardListener(deck, openCards);	
 };
 
 //make a click handler for the reset button
