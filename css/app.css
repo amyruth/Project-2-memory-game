@@ -67,7 +67,7 @@ h1 {
 
 .deck .card.open {
 	transform: rotateY(0);
-	background: #8a02e4;
+	background: #804fce;
 	cursor: default;
 }
 
@@ -77,12 +77,12 @@ h1 {
 
 .deck .card.match {
 	cursor: default;
-	background: #02ccba;
+	background: #10c228;
 	font-size: 33px;
 }
 
 .mismatch{
-	background: #dd1111'
+	background: #dd1111;
 }
 /*
 * Styles for the Score Panel
