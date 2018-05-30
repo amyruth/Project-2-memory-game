@@ -5,7 +5,7 @@ let openCards = [];
 let frag = document.createDocumentFragment();
 let moveCounter = 0;
 let cardCounter = 0;
-let moves = document.getElementsByClassName('moves');
+let moves = document.querySelector('.moves');
 let matches = 0;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -53,13 +53,16 @@ function compareCards(cardList) {
 	}
 };
 
-function captureAndCompare(card, cardList) {
+function captureCards(card, cardList) {
 	if (cardList.length < 3) {
 		card.classList.add('show', 'open');
 		cardList.push(card);
 		console.log(cardList);
 	}
 	if(cardList.length === 2){
+		moveCounter += 1;
+		moves.textContent = moveCounter;
+		console.log(`moves: ${moveCounter}`);
 		setTimeout(function(){
 			compareCards(cardList);			
 		}
@@ -75,7 +78,7 @@ function cardListener(deck,cardHand){
 				return;
 			}else{
 				let clickedCard = this;
-				captureAndCompare(clickedCard, openCards);
+				captureCards(clickedCard, openCards);
 			}
 		});
 	}, false);	
@@ -85,6 +88,7 @@ function newBoard() {
 	while (deck.firstChild) {
 		deck.removeChild(deck.firstChild);
 	};
+	moveCounter = 0;
 	shuffle(cards);
 	makeNewCards(cards);
 	deck.appendChild(frag);
