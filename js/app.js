@@ -67,6 +67,21 @@ function captureAndCompare(card, cardList) {
 	}
 };
 
+function cardListener(deck,cardHand){
+	deck.querySelectorAll('li').forEach(function (card) {
+		console.log('assigning listenders');
+		card.addEventListener('click', function (e) {
+			if(openCards.length === 2){
+				return;
+			}else{
+				let clickedCard = this;
+				captureAndCompare(clickedCard, openCards);
+			}
+		}); //end event listener
+	}, false); //end forEach
+	
+};
+
 function newBoard() {
 	while (deck.firstChild) {
 		deck.removeChild(deck.firstChild);
@@ -75,6 +90,9 @@ function newBoard() {
 	makeNewCards(cards);
 	deck.appendChild(frag);
 	console.log(deck);
+	cardListener(deck, openCards);
+	
+	
 };
 
 //when page loads for the first time a new board is created
@@ -92,19 +110,6 @@ resetButton.addEventListener('click', function () {
 // make function that assigns eventlistener to new li items
 // add to newboard function?
 // when reset is clicked it's not getting to below foreach loop, so event handler is not attached
-
-
-deck.querySelectorAll('li').forEach(function (card) {
-	console.log('assigning listenders');
-	card.addEventListener('click', function (e) {
-		if(openCards.length === 2){
-			return;
-		}else{
-			let clickedCard = this;
-			captureAndCompare(clickedCard, openCards);
-		}
-	}); //end event listener
-}, false); //end forEach
 
 /*
  * set up the event listener for a card. If a card is clicked:
