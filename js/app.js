@@ -7,6 +7,10 @@ let moveCounter = 0;
 let cardCounter = 0;
 let moves = document.querySelector('.moves');
 let matches = 0;
+let starCounter = 0;
+let starsRemaining = 3;
+let stars = document.querySelector('.stars');
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 	var currentIndex = array.length,
@@ -53,12 +57,40 @@ function compareCards(cardList) {
 	}
 };
 
+function starRating(moveCount){
+	let star = document.querySelector('.stars');
+	//find way to remove stars and put them back efficiently
+	star.firstElementChild.remove();
+	starsRemaining--;
+	return starsRemaining;
+};
+
+function replaceStars(){
+	let frag2 = document.createDocumentFragment();
+	let starCount = stars.querySelectorAll('li').length;
+	for(let i = starCount; i <= 2; i++){
+		let li = document.createElement('li');
+		let starIcon = document.createElement('i');
+		starIcon.classList.add('fa', 'fa-star');
+		li.appendChild(starIcon);
+		frag2.appendChild(li);
+	};
+	stars.appendChild(frag2);
+}
+
 function displayMoves(cardlist){
 	if(cardlist.length === 2){
 		moveCounter += 1;
 		moves.textContent = moveCounter;
 	}
+	if(moveCounter === 8 || moveCounter === 16){
+		starRating(moveCounter);
+	}
 };
+
+
+
+
 
 function captureCards(card, cardList) {
 	if (cardList.length < 3) {
@@ -69,13 +101,10 @@ function captureCards(card, cardList) {
 
 	if(cardList.length === 2){
 		displayMoves(cardList);
-		// moveCounter += 1;
-		// moves.textContent = moveCounter;
 		console.log(`moves: ${moveCounter}`);
 		setTimeout(function(){
 			compareCards(cardList);			
-		}
-		, 1000);
+		} , 700);
 	}
 };
 
@@ -102,6 +131,7 @@ function newBoard() {
 	shuffle(cards);
 	makeNewCards(cards);
 	deck.appendChild(frag);
+	replaceStars();
 	console.log(deck);
 	cardListener(deck, openCards);	
 };
