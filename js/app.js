@@ -69,17 +69,16 @@ function captureAndCompare(card, cardList) {
 
 function cardListener(deck,cardHand){
 	deck.querySelectorAll('li').forEach(function (card) {
-		console.log('assigning listenders');
-		card.addEventListener('click', function (e) {
+		console.log('assigning listeners');
+		card.addEventListener('click', function () {
 			if(openCards.length === 2){
 				return;
 			}else{
 				let clickedCard = this;
 				captureAndCompare(clickedCard, openCards);
 			}
-		}); //end event listener
-	}, false); //end forEach
-	
+		});
+	}, false);	
 };
 
 function newBoard() {
@@ -95,9 +94,6 @@ function newBoard() {
 	
 };
 
-//when page loads for the first time a new board is created
-newBoard();
-
 //make a click handler for the reset button
 resetButton.addEventListener('click', function () {
 	if(openCards.length !== 0){
@@ -106,10 +102,10 @@ resetButton.addEventListener('click', function () {
 	newBoard();
 });
 
+//when page loads for the first time a new board is created
+newBoard();
 
-// make function that assigns eventlistener to new li items
-// add to newboard function?
-// when reset is clicked it's not getting to below foreach loop, so event handler is not attached
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
