@@ -35,26 +35,6 @@ function makeNewCards(cardDeck) {
 	return frag;
 };
 
-function newBoard() {
-	while (deck.firstChild) {
-		deck.removeChild(deck.firstChild);
-	};
-	shuffle(cards);
-	makeNewCards(cards);
-	deck.appendChild(frag);
-	console.log(deck);
-};
-
-//when page loads for the first time a new board is created
-newBoard();
-
-//make a click handler for the reset button
-resetButton.addEventListener('click', function () {
-	newBoard();
-});
-
-// TODO: Make sure 3rd click's not allowed
-
 function compareCards(cardList) {
 	console.log(cardList);
 	let search = cardList[0].innerHTML;
@@ -83,11 +63,39 @@ function captureAndCompare(card, cardList) {
 		setTimeout(function(){
 			compareCards(cardList);			
 		}
-		, 1500);
+		, 1000);
 	}
 };
 
+function newBoard() {
+	while (deck.firstChild) {
+		deck.removeChild(deck.firstChild);
+	};
+	shuffle(cards);
+	makeNewCards(cards);
+	deck.appendChild(frag);
+	console.log(deck);
+};
+
+//when page loads for the first time a new board is created
+newBoard();
+
+//make a click handler for the reset button
+resetButton.addEventListener('click', function () {
+	if(openCards.length !== 0){
+		openCards.length = 0;
+	}
+	newBoard();
+});
+
+
+// make function that assigns eventlistener to new li items
+// add to newboard function?
+// when reset is clicked it's not getting to below foreach loop, so event handler is not attached
+
+
 deck.querySelectorAll('li').forEach(function (card) {
+	console.log('assigning listenders');
 	card.addEventListener('click', function (e) {
 		if(openCards.length === 2){
 			return;
@@ -95,9 +103,6 @@ deck.querySelectorAll('li').forEach(function (card) {
 			let clickedCard = this;
 			captureAndCompare(clickedCard, openCards);
 		}
-		
-		
-		// NEED TO CLEAR ARRAY
 	}); //end event listener
 }, false); //end forEach
 
