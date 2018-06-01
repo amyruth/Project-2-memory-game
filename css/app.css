@@ -89,6 +89,7 @@ h1 {
 	text-align: left;
 	width: 345px;
 	margin-bottom: 10px;
+	/* border: 1px solid black; */
 }
 
 .score-panel .stars {
@@ -110,4 +111,9 @@ h1 {
 
 .hide{
 	display: none;
+}
+
+.timer{
+	display: inline;
+	margin-left: 40px;
 }
