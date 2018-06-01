@@ -10,7 +10,8 @@ let starsRemaining = 3;
 let stars = document.querySelector('.stars');
 let time = document.querySelector('.time');
 let minutes = 0;
-let seconds = 0;
+let seconds = 1;
+let gameInterval;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -46,6 +47,7 @@ function compareCards(cardList) {
 		cardList.forEach(function (card) {
 			card.classList.add('match');
 			console.log('match');
+			//remove event listener
 		});
 		matches++;
 		cardList.length = 0;
@@ -57,8 +59,10 @@ function compareCards(cardList) {
 		});
 		cardList.length = 0;
 	}
+	//stops timer when all matches are made
 	if(matches === 8){
-		return console.log('game complete');
+		stopTime(gameInterval);
+		return console.log('game complete' + matches);
 		// launch modal
 	}
 };
@@ -126,12 +130,9 @@ function cardListener(deck, cardHand) {
 	}, false);
 };
 
-// true/false flag for timer operation?
-
 function gameTime(){
-	seconds++;
 	time.innerHTML = `${minutes} min ${seconds} sec`;
-	console.log(`interval: ${seconds}`);
+	seconds++;
 	if(seconds === (1000*60/1000)){
 		minutes++;
 		seconds = 1;
@@ -140,39 +141,43 @@ function gameTime(){
 
 function stopTime(interval){
 	clearInterval(interval);
-	minutes = 0;
-	seconds = 0;
-	console.log(`cleared interval ${seconds}`);
+	console.log('timer stopped');
+	// return minutes, seconds
 };
 
+//removes old cards, resets counters to defaults, recreates decks and lays new board, stops and restarts timer.
 function newBoard() {
 	while (deck.firstChild) {
 		deck.removeChild(deck.firstChild);
 	};
 	moveCounter = 0;
 	moves.textContent = 0;
+	matches = 0;
+	minutes = 0;
+	seconds = 1;
 	shuffle(cards);
 	makeNewCards(cards);
 	deck.appendChild(frag);
 	replaceStars();
 	console.log(deck);
 	cardListener(deck, openCards);
+	stopTime(gameInterval);
+	gameInterval = setInterval(gameTime, 1000);
 };
 
 
+//when page loads for the first time a new board is created
+newBoard();
 
 //click handler for the reset button
-resetButton.addEventListener('click', function () {
-	
+resetButton.addEventListener('click', function () {	
 	if (openCards.length !== 0) {
 		openCards.length = 0;
 	}
+
 	newBoard();
 });
 
-//when page loads for the first time a new board is created
-
-newBoard();
 
 
 

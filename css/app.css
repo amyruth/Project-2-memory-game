@@ -109,11 +109,6 @@ h1 {
 	cursor: pointer;
 }
 
-.hide{
-	display: none;
-}
-
-.timer{
-	display: inline;
-	margin-left: 40px;
+.time{
+	margin-left: 30px;
 }
