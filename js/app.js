@@ -13,6 +13,7 @@ let minutes = 0;
 let seconds = 1;
 let gameInterval;
 
+// ###### CARD FUNCTIONS ######
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 	var currentIndex = array.length,
@@ -28,7 +29,7 @@ function shuffle(array) {
 	return array;
 }
 
-//clears current board, shuffles card types and creates new cards for board
+//clears current board, shuffles card types and document fragment of new card elements
 function makeNewCards(cardDeck) {
 	cardDeck.forEach(function (card) {
 		let li = document.createElement('li');
@@ -41,13 +42,31 @@ function makeNewCards(cardDeck) {
 	return frag;
 };
 
+function captureCards(card, cardList) {
+	if (cardList.length <= 2 && !card.classList.contains('match')) {
+		card.classList.add('show', 'open');
+		cardList.push(card);
+		console.log(cardList[0].childNodes);
+	}
+
+	if (cardList.length === 2) {
+		displayMoves(cardList);
+		console.log(`moves: ${moveCounter}`);
+		console.log(cardList[1].childNodes);
+		setTimeout(function () {
+			compareCards(cardList);
+		}, 1000);
+	}
+};
+
 function compareCards(cardList) {
 	let search = cardList[0].innerHTML;
 	if (cardList[1].innerHTML.indexOf(search) !== -1) {
 		cardList.forEach(function (card) {
 			card.classList.add('match');
+			// remove click even from matched cards
+			card.removeEventListener('click', addListener, false);
 			console.log('match');
-			//remove event listener
 		});
 		matches++;
 		cardList.length = 0;
@@ -60,13 +79,56 @@ function compareCards(cardList) {
 		cardList.length = 0;
 	}
 	//stops timer when all matches are made
-	if(matches === 8){
+	if (matches === 8) {
 		stopTime(gameInterval);
-		return console.log('game complete' + matches);
+		return console.log('game complete ' + matches);
 		// launch modal
 	}
 };
 
+function addListener() {
+	console.log('clicked card');
+	if (cardHand.length === 2) {
+		return;
+	} else {
+		let clickedCard = this;
+		captureCards(clickedCard, openCards);
+	}
+}
+
+function addListener(cardHand) {
+	console.log('clicked card');
+	if (cardHand.length === 2) {
+		return;
+	} else {
+		let clickedCard = this;
+		captureCards(clickedCard, openCards);
+	}
+}
+
+function cardListener(deck, cardHand){
+	deck.querySelectorAll('li').forEach(function(card){
+		console.log('assigning listeners');
+		card.addEventListener('click', addListener, false);
+	});
+};
+
+// function cardListener(deck, cardHand) {
+// 	deck.querySelectorAll('li').forEach(function (card) {
+// 		console.log('assigning listeners');
+// 		card.addEventListener('click', function () {
+// 			console.log('clicked card');
+// 			if (cardHand.length === 2) {
+// 				return;
+// 			} else {
+// 				let clickedCard = this;
+// 				captureCards(clickedCard, openCards);
+// 			}
+// 		});
+// 	}, false);
+// };
+
+// ###### SCORE BOARD FUNCTIONS ######
 function starRating(moveCount) {
 	let star = document.querySelector('.stars');
 	star.firstElementChild.remove();
@@ -98,48 +160,16 @@ function displayMoves(cardlist) {
 	}
 };
 
-function captureCards(card, cardList) {
-	if (cardList.length <= 2 && !card.classList.contains('match')) {
-		card.classList.add('show', 'open');
-		cardList.push(card);
-		console.log(cardList[0].childNodes);
-	}
-
-	if (cardList.length === 2) {
-		displayMoves(cardList);
-		console.log(`moves: ${moveCounter}`);
-		console.log(cardList[1].childNodes);
-		setTimeout(function () {
-			compareCards(cardList);
-		}, 800);
-	}
-};
-
-function cardListener(deck, cardHand) {
-	deck.querySelectorAll('li').forEach(function (card) {
-		console.log('assigning listeners');
-		card.addEventListener('click', function () {
-			console.log('clicked card');
-			if (openCards.length === 2) {
-				return;
-			} else {
-				let clickedCard = this;
-				captureCards(clickedCard, openCards);
-			}
-		});
-	}, false);
-};
-
-function gameTime(){
+function gameTime() {
 	time.innerHTML = `${minutes} min ${seconds} sec`;
 	seconds++;
-	if(seconds === (1000*60/1000)){
+	if (seconds === (1000 * 60 / 1000)) {
 		minutes++;
 		seconds = 1;
-	}	
+	}
 };
 
-function stopTime(interval){
+function stopTime(interval) {
 	clearInterval(interval);
 	console.log('timer stopped');
 	// return minutes, seconds
@@ -170,7 +200,7 @@ function newBoard() {
 newBoard();
 
 //click handler for the reset button
-resetButton.addEventListener('click', function () {	
+resetButton.addEventListener('click', function () {
 	if (openCards.length !== 0) {
 		openCards.length = 0;
 	}
