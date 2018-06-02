@@ -53,8 +53,11 @@ function captureCards(card, cardList) {
 		displayMoves(cardList);
 		console.log(`moves: ${moveCounter}`);
 		console.log(cardList[1].childNodes);
+		//temporarily disables mouse clicks on board
+		deck.style.pointerEvents = 'none';
 		setTimeout(function () {
 			compareCards(cardList);
+			deck.style.pointerEvents = 'auto';
 		}, 1000);
 	}
 };
@@ -81,20 +84,13 @@ function compareCards(cardList) {
 	//stops timer when all matches are made
 	if (matches === 8) {
 		stopTime(gameInterval);
-		return console.log('game complete ' + matches);
+		console.log('game complete ' + matches);
+		console.log(moves);
+		console.log(minutes);
+		console.log(seconds);
 		// launch modal
 	}
 };
-
-function addListener() {
-	console.log('clicked card');
-	if (cardHand.length === 2) {
-		return;
-	} else {
-		let clickedCard = this;
-		captureCards(clickedCard, openCards);
-	}
-}
 
 function addListener(cardHand) {
 	console.log('clicked card');
@@ -104,7 +100,7 @@ function addListener(cardHand) {
 		let clickedCard = this;
 		captureCards(clickedCard, openCards);
 	}
-}
+};
 
 function cardListener(deck, cardHand){
 	deck.querySelectorAll('li').forEach(function(card){
@@ -112,21 +108,6 @@ function cardListener(deck, cardHand){
 		card.addEventListener('click', addListener, false);
 	});
 };
-
-// function cardListener(deck, cardHand) {
-// 	deck.querySelectorAll('li').forEach(function (card) {
-// 		console.log('assigning listeners');
-// 		card.addEventListener('click', function () {
-// 			console.log('clicked card');
-// 			if (cardHand.length === 2) {
-// 				return;
-// 			} else {
-// 				let clickedCard = this;
-// 				captureCards(clickedCard, openCards);
-// 			}
-// 		});
-// 	}, false);
-// };
 
 // ###### SCORE BOARD FUNCTIONS ######
 function starRating(moveCount) {
