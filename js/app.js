@@ -62,7 +62,7 @@ function captureCards(card, cardList) {
 		setTimeout(function () {
 			compareCards(cardList);
 			deck.style.pointerEvents = 'auto';
-		}, 1000);
+		}, 1300);
 	}
 };
 
@@ -192,7 +192,6 @@ function newBoard() {
 	stopTime(gameInterval);
 	gameInterval = setInterval(gameTime, 1000);
 };
-
 
 //when page loads for the first time a new board is created
 newBoard();
