@@ -37,7 +37,7 @@ function shuffle(array) {
 function makeNewCards(cardDeck) {
 	cardDeck.forEach(function (card) {
 		let li = document.createElement('li');
-		li.className = 'card';
+		li.classList.add('card', 'animated');
 		let icon = document.createElement('i');
 		icon.className = card;
 		li.appendChild(icon);
@@ -47,22 +47,24 @@ function makeNewCards(cardDeck) {
 };
 
 function captureCards(card, cardList) {
-	if (cardList.length <= 2 && !card.classList.contains('match')) {
-		card.classList.add('show', 'open');
+	if (cardList.length <= 2 && !card.classList.contains('show')) {
+		card.classList.add('show', 'open', 'flipInY');
 		cardList.push(card);
 		console.log(cardList[0].childNodes);
 	}
 
 	if (cardList.length === 2) {
+		deck.style.pointerEvents = 'none';
 		displayMoves(cardList);
 		console.log(`moves: ${moveCounter}`);
 		console.log(cardList[1].childNodes);
-		//temporarily disables mouse clicks on board before matching
-		deck.style.pointerEvents = 'none';
+		//temporarily disables mouse clicks on board while matching
 		setTimeout(function () {
 			compareCards(cardList);
-			deck.style.pointerEvents = 'auto';
-		}, 1300);
+		}, 1000);
+		// setTimeout(function(){
+		// 	deck.style.pointerEvents = 'auto';
+		// }, 1000);
 	}
 };
 
@@ -70,9 +72,10 @@ function compareCards(cardList) {
 	let search = cardList[0].innerHTML;
 	if (cardList[1].innerHTML.indexOf(search) !== -1) {
 		cardList.forEach(function (card) {
-			card.classList.add('match');
-			// remove click even from matched cards
+			card.classList.add('match', 'tada');
+			// remove click event from matched cards
 			card.removeEventListener('click', addListener, false);
+			card.classList.remove('flipInY');
 			console.log('match');
 		});
 		matches++;
@@ -80,19 +83,30 @@ function compareCards(cardList) {
 		console.log(`matches ${matches}`);
 	} else {
 		cardList.forEach(function (card) {
-			card.classList.remove('show', 'open');
+			card.classList.remove('show', 'open', 'flipInY');
 			console.log('no match');
 		});
 		cardList.length = 0;
 	}
+
+	setTimeout(function () {
+		deck.style.pointerEvents = 'auto';
+		console.log('ready');
+	}, 200);
+
 	//stops timer and launches modal when all matches are made
 	if (matches === 8) {
 		stopTime(gameInterval);
 		console.log('game complete ');
-		finalTime.textContent = `Total Time: ${time.textContent}`;
-		totalMoves.textContent = `Moves Made: ${moves.textContent}`;
-		finalStars();
-		modal.style.display = 'flex';	
+
+		setTimeout(function () {
+			finalTime.textContent = `Total Time: ${time.textContent}`;
+			totalMoves.textContent = `Moves Made: ${moves.textContent}`;
+			finalStars();
+			modal.style.display = 'flex';
+			modal.classList.add('fadeInDown');
+		}, 1500);
+
 	}
 };
 
@@ -106,8 +120,8 @@ function addListener(cardHand) {
 	}
 };
 
-function cardListener(deck, cardHand){
-	deck.querySelectorAll('li').forEach(function(card){
+function cardListener(deck, cardHand) {
+	deck.querySelectorAll('li').forEach(function (card) {
 		console.log('assigning listeners');
 		card.addEventListener('click', addListener, false);
 	});
@@ -159,9 +173,9 @@ function stopTime(interval) {
 	// return minutes, seconds
 };
 
-function finalStars(){
+function finalStars() {
 	let starCount = stars.childElementCount;
-	for(let i = 1; i <= starCount; i ++){
+	for (let i = 1; i <= starCount; i++) {
 		let icon = document.createElement('i');
 		icon.classList.add('fa', 'fa-star');
 		frag.appendChild(icon);
