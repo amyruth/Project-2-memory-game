@@ -111,3 +111,54 @@ h1 {
 .time{
 	margin-left: 30px;
 }
+
+/* Modal styling */
+/* Modal creation technique care of Richard Middleton @ RichardCodes https://youtu.be/gLWIYk0Sd38 */
+.modal-bg{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
+	display: none;
+	justify-content: center;
+}
+
+.modal-content{
+	font-family: 'Coda', cursive;
+	font-size: 1.25em;
+	display: flex;
+	flex-direction: column;
+	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+	width: 60%;
+	height: 400px;
+	align-self: center;
+	border-radius: 10px;
+}
+
+.modal-content h1{
+	text-align: center;
+	font-size: 2em;
+}
+
+.stats{
+	width: 40%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.exit{
+	font-family: inherit;
+	font-size: 20px;
+	/* color: #f0ffff; */
+	font-weight: 800;
+	letter-spacing: 3px;
+	border-radius: 10px;
+	margin-top: 20px;
+	padding: 10px 40px;
+	background-color: #D5C4E7;
+}
+
+.modal-close{
+	align-self: center;
+}

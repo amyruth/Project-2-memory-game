@@ -12,7 +12,10 @@ let time = document.querySelector('.time');
 let minutes = 0;
 let seconds = 1;
 let gameInterval;
-
+let modal = document.querySelector('.modal-bg');
+let finalTime = document.querySelector('.finalTime');
+let totalMoves = document.querySelector('.totalMoves');
+let endStars = document.querySelector('.starRating');
 // ###### CARD FUNCTIONS ######
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -53,7 +56,7 @@ function captureCards(card, cardList) {
 		displayMoves(cardList);
 		console.log(`moves: ${moveCounter}`);
 		console.log(cardList[1].childNodes);
-		//temporarily disables mouse clicks on board
+		//temporarily disables mouse clicks on board before matching
 		deck.style.pointerEvents = 'none';
 		setTimeout(function () {
 			compareCards(cardList);
@@ -81,14 +84,14 @@ function compareCards(cardList) {
 		});
 		cardList.length = 0;
 	}
-	//stops timer when all matches are made
+	//stops timer and launches modal when all matches are made
 	if (matches === 8) {
 		stopTime(gameInterval);
-		console.log('game complete ' + matches);
-		console.log(moves);
-		console.log(minutes);
-		console.log(seconds);
-		// launch modal
+		console.log('game complete ');
+		finalTime.textContent = `Total Time: ${time.textContent}`;
+		totalMoves.textContent = `Moves Made: ${moves.textContent}`;
+		finalStars();
+		modal.style.display = 'flex';	
 	}
 };
 
@@ -118,16 +121,15 @@ function starRating(moveCount) {
 };
 
 function replaceStars() {
-	let frag2 = document.createDocumentFragment();
 	let starCount = stars.querySelectorAll('li').length;
 	for (let i = starCount; i <= 2; i++) {
 		let li = document.createElement('li');
 		let starIcon = document.createElement('i');
 		starIcon.classList.add('fa', 'fa-star');
 		li.appendChild(starIcon);
-		frag2.appendChild(li);
+		frag.appendChild(li);
 	};
-	stars.appendChild(frag2);
+	stars.appendChild(frag);
 }
 
 //2 open cards = 1 move
@@ -154,6 +156,16 @@ function stopTime(interval) {
 	clearInterval(interval);
 	console.log('timer stopped');
 	// return minutes, seconds
+};
+
+function finalStars(){
+	let starCount = stars.childElementCount;
+	for(let i = 1; i <= starCount; i ++){
+		let icon = document.createElement('i');
+		icon.classList.add('fa', 'fa-star');
+		frag.appendChild(icon);
+	}
+	endStars.appendChild(frag);
 };
 
 //removes old cards, resets counters to defaults, recreates decks and lays new board, stops and restarts timer.
