@@ -16,6 +16,7 @@ let modal = document.querySelector('.modal-bg');
 let finalTime = document.querySelector('.finalTime');
 let totalMoves = document.querySelector('.totalMoves');
 let endStars = document.querySelector('.starRating');
+let modalButton = document.querySelector('.exit');
 // ###### CARD FUNCTIONS ######
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -178,6 +179,10 @@ function newBoard() {
 	matches = 0;
 	minutes = 0;
 	seconds = 1;
+	finalTime.textContent = '';
+	totalMoves.textContent = '';
+	endStars.textContent = '';
+	modal.style.display = 'none';
 	shuffle(cards);
 	makeNewCards(cards);
 	deck.appendChild(frag);
@@ -197,11 +202,10 @@ resetButton.addEventListener('click', function () {
 	if (openCards.length !== 0) {
 		openCards.length = 0;
 	}
-
 	newBoard();
 });
 
-
+modalButton.addEventListener('click', newBoard, false);
 
 
 
