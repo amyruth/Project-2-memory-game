@@ -12,11 +12,18 @@ let time = document.querySelector('.time');
 let minutes = 0;
 let seconds = 1;
 let gameInterval;
+<<<<<<< HEAD
 let modal = document.querySelector('.modal-bg');
 let finalTime = document.querySelector('.finalTime');
 let totalMoves = document.querySelector('.totalMoves');
 let endStars = document.querySelector('.starRating');
 // ###### CARD FUNCTIONS ######
+||||||| merged common ancestors
+
+=======
+
+// ###### CARD FUNCTIONS ######
+>>>>>>> 268b1aa71daa049412622eee98da0af0049eb3d5
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
 	var currentIndex = array.length,
@@ -45,6 +52,7 @@ function makeNewCards(cardDeck) {
 	return frag;
 };
 
+<<<<<<< HEAD
 function captureCards(card, cardList) {
 	if (cardList.length <= 2 && !card.classList.contains('match')) {
 		card.classList.add('show', 'open');
@@ -65,6 +73,26 @@ function captureCards(card, cardList) {
 	}
 };
 
+||||||| merged common ancestors
+=======
+function captureCards(card, cardList) {
+	if (cardList.length <= 2 && !card.classList.contains('match')) {
+		card.classList.add('show', 'open');
+		cardList.push(card);
+		console.log(cardList[0].childNodes);
+	}
+
+	if (cardList.length === 2) {
+		displayMoves(cardList);
+		console.log(`moves: ${moveCounter}`);
+		console.log(cardList[1].childNodes);
+		setTimeout(function () {
+			compareCards(cardList);
+		}, 1000);
+	}
+};
+
+>>>>>>> 268b1aa71daa049412622eee98da0af0049eb3d5
 function compareCards(cardList) {
 	let search = cardList[0].innerHTML;
 	if (cardList[1].innerHTML.indexOf(search) !== -1) {
