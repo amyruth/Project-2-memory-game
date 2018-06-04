@@ -1,20 +1,37 @@
-# Memory Game Project
+# Udacity Memory Game Project
 
-## Table of Contents
+Project 2 in the Udacity Front End Nanodegree track. A mobile-friendly version of the classic game of Concentration.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+Coded by Amy Rutherford.
 
-## Instructions
+## Dependencies
+**animate.css library for card effects**
+https://daneden.github.io/animate.css/
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+**'Coda' from Google Fonts**
+https://fonts.google.com/specimen/Coda
 
-To get started, open `js/app.js` and start building out the app's functionality
+**Card symbols, stars and reset button from Font Awesome**
+https://fontawesome.com/
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Additional Resources
+**Mike Wales Online Study Session** 
+https://www.youtube.com/watch?v=_rUH-sEs68Y
 
-## Contributing
+**Simple Modal Tutorial from RichardCodes Youtube Channel** 
+https://youtu.be/gLWIYk0Sd38
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+## Play The Game
+[Click Here](https://gallant-booth-5a688e.netlify.com/) to play the game online. Or download the files from this repository and open the index.html file in your web browser.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## How to Play
+
+Click a card. Click another card. If they match, the cards will turn green and stay visible. If they don't match, the cards are turned over again. Game is complete when all 16 cards have been matched.
+
+To play a new game, click 'Play Again' on the win page or the reset button to the top right of the game board.
+
+## Scoring
+Every 8 moves you will lose a star. No biggie, nobody's perfect!
+
+## Want to Contribute?
+This is a project for Udacity students. If you'd like give this project a try, [grab the starter code from this Github repository](https://github.com/udacity/fend-project-memory-game).
