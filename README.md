@@ -2,7 +2,7 @@
 
 Project 2 in the Udacity Front End Nanodegree track. A mobile-friendly version of the classic game of Concentration.
 
-Coded by Amy Rutherford
+Coded by Amy Rutherford.
 
 ## Dependencies
 **animate.css library for card effects**
