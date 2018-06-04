@@ -40,7 +40,8 @@ h1 {
 
 .deck {
 	width: 660px;
-	min-height: 680px;
+	/* min-height: 680px; */
+	height: 70%;
 	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
 	padding: 32px;
 	border-radius: 10px;
@@ -174,8 +175,9 @@ h1 {
 		width:97%
 	}
 	.deck .card{
-		height: 65px;
-		width: 65px;
+		height: 60px;
+		width: 60px;
+		margin: 3px;
 	}
 	.score-panel{
 		font-size: 20px;
@@ -206,7 +208,8 @@ h1 {
 		margin: 3px;
 	}
 }
-@media screen and (min-width: 470px){
+
+@media screen and (min-width: 469px){
 	.deck{
 		width: 90%;
 	}
