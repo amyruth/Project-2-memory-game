@@ -284,6 +284,9 @@ h1 {
 		width: 140px;
 		margin: 5px;
 	}
+	header h1{
+		margin: 10px auto;
+	}
 	.container{
 		width: 750px;
 		margin: 0 auto;
