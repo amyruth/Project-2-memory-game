@@ -17,6 +17,7 @@ let finalTime = document.querySelector('.finalTime');
 let totalMoves = document.querySelector('.totalMoves');
 let endStars = document.querySelector('.starRating');
 let modalButton = document.querySelector('.exit');
+
 // ###### CARD FUNCTIONS ######
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -33,7 +34,6 @@ function shuffle(array) {
 	return array;
 }
 
-//clears current board, shuffles card types and document fragment of new card elements
 function makeNewCards(cardDeck) {
 	cardDeck.forEach(function (card) {
 		let li = document.createElement('li');
@@ -50,21 +50,15 @@ function captureCards(card, cardList) {
 	if (cardList.length <= 2 && !card.classList.contains('show')) {
 		card.classList.add('show', 'open', 'flipInY');
 		cardList.push(card);
-		console.log(cardList[0].childNodes);
 	}
 
 	if (cardList.length === 2) {
+		//disables mouse clicks on board while matching
 		deck.style.pointerEvents = 'none';
 		displayMoves(cardList);
-		console.log(`moves: ${moveCounter}`);
-		console.log(cardList[1].childNodes);
-		//temporarily disables mouse clicks on board while matching
 		setTimeout(function () {
 			compareCards(cardList);
 		}, 1000);
-		// setTimeout(function(){
-		// 	deck.style.pointerEvents = 'auto';
-		// }, 1000);
 	}
 };
 
@@ -73,32 +67,28 @@ function compareCards(cardList) {
 	if (cardList[1].innerHTML.indexOf(search) !== -1) {
 		cardList.forEach(function (card) {
 			card.classList.add('match', 'tada');
-			// remove click event from matched cards
 			card.removeEventListener('click', addListener, false);
 			card.classList.remove('flipInY');
-			console.log('match');
+			console.log('match'); //remove before submitting
 		});
 		matches++;
 		cardList.length = 0;
-		console.log(`matches ${matches}`);
+		console.log(`matches ${matches}`);//remove before submitting
 	} else {
 		cardList.forEach(function (card) {
 			card.classList.remove('show', 'open', 'flipInY');
-			console.log('no match');
+			console.log('no match');//remove before submitting
 		});
 		cardList.length = 0;
 	}
 
 	setTimeout(function () {
-		deck.style.pointerEvents = 'auto';
-		console.log('ready');
+		deck.style.pointerEvents = 'auto';;
 	}, 200);
 
-	//stops timer and launches modal when all matches are made
+	//stops timer and launches win modal
 	if (matches === 8) {
 		stopTime(gameInterval);
-		console.log('game complete ');
-
 		setTimeout(function () {
 			finalTime.textContent = `Total Time: ${time.textContent}`;
 			totalMoves.textContent = `Moves Made: ${moves.textContent}`;
@@ -111,7 +101,6 @@ function compareCards(cardList) {
 };
 
 function addListener(cardHand) {
-	console.log('clicked card');
 	if (cardHand.length === 2) {
 		return;
 	} else {
@@ -122,17 +111,16 @@ function addListener(cardHand) {
 
 function cardListener(deck, cardHand) {
 	deck.querySelectorAll('li').forEach(function (card) {
-		console.log('assigning listeners');
 		card.addEventListener('click', addListener, false);
 	});
 };
 
 // ###### SCORE BOARD FUNCTIONS ######
+
 function starRating(moveCount) {
 	let star = document.querySelector('.stars');
 	star.firstElementChild.remove();
 	starsRemaining--;
-	return starsRemaining;
 };
 
 function replaceStars() {
@@ -169,8 +157,6 @@ function gameTime() {
 
 function stopTime(interval) {
 	clearInterval(interval);
-	console.log('timer stopped');
-	// return minutes, seconds
 };
 
 function finalStars() {
@@ -201,14 +187,12 @@ function newBoard() {
 	makeNewCards(cards);
 	deck.appendChild(frag);
 	replaceStars();
-	console.log(deck);
+	console.log(deck); //remove before submitting
 	cardListener(deck, openCards);
 	stopTime(gameInterval);
 	gameInterval = setInterval(gameTime, 1000);
 };
 
-//when page loads for the first time a new board is created
-newBoard();
 
 //click handler for the reset button
 resetButton.addEventListener('click', function () {
@@ -220,6 +204,8 @@ resetButton.addEventListener('click', function () {
 
 modalButton.addEventListener('click', newBoard, false);
 
+//when page loads for the first time a new board is created
+newBoard();
 
 
 
