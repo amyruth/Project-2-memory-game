@@ -2,7 +2,7 @@
 
 Project 2 in the Udacity Front End Nanodegree track. A mobile-friendly version of the classic game of Concentration.
 
-Coded by Amy Rutherford.
+Coded by Amy Rutherford
 
 ## Dependencies
 **animate.css library for card effects**
@@ -22,7 +22,7 @@ https://www.youtube.com/watch?v=_rUH-sEs68Y
 https://youtu.be/gLWIYk0Sd38
 
 ## Play The Game
-[Click Here](https://gallant-booth-5a688e.netlify.com/) to play the game online. Or download the files from this repository and open the index.html file in your web browser.
+[Click Here](https://gallant-booth-5a688e.netlify.com/) to play the game online.
 
 ## How to Play
 

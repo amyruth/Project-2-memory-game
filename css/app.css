@@ -282,6 +282,7 @@ h1 {
 	.deck .card{
 		height: 140px;
 		width: 140px;
+		margin: 5px;
 	}
 	.container{
 		width: 750px;
