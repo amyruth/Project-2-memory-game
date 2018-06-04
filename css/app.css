@@ -157,7 +157,7 @@ h1 {
 .exit {
 	font-family: inherit;
 	font-size: 20px;
-	font-weight: 800;
+	font-weight: 700;
 	letter-spacing: 3px;
 	border-radius: 10px;
 	margin-top: 20px;
@@ -170,7 +170,7 @@ h1 {
 }
 
 
-@media screen and (min-width: 350px) and (max-width: 390px){
+@media screen and (max-width: 390px){
 	.deck{
 		width:97%
 	}
@@ -187,7 +187,8 @@ h1 {
 	}
 	.stats{
 		width: 80%;
-		font-size: 20px;
+		font-size: 18px;
+		text-align: center;
 	}
 }
 
@@ -289,6 +290,10 @@ h1 {
 	}
 	.container{
 		width: 750px;
+		margin: 0 auto;
+	}
+	.modal-content{
+		width: 650px;
 		margin: 0 auto;
 	}
 }
