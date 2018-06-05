@@ -205,4 +205,4 @@ resetButton.addEventListener('click', function () {
 modalButton.addEventListener('click', newBoard, false);
 
 //when page loads for the first time a new board is created
-newBoard();
+window.onload = newBoard();
