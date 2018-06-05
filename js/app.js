@@ -109,7 +109,7 @@ function addListener(cardHand) {
 	}
 };
 
-function cardListener(deck, cardHand) {
+function cardListener(deck) {
 	deck.querySelectorAll('li').forEach(function (card) {
 		card.addEventListener('click', addListener, false);
 	});
@@ -117,7 +117,7 @@ function cardListener(deck, cardHand) {
 
 // ###### SCORE BOARD FUNCTIONS ######
 
-function starRating(moveCount) {
+function starRating() {
 	let star = document.querySelector('.stars');
 	star.firstElementChild.remove();
 	starsRemaining--;
@@ -142,7 +142,7 @@ function displayMoves(cardlist) {
 		moves.textContent = moveCounter;
 	}
 	if (moveCounter === 8 || moveCounter === 16) {
-		starRating(moveCounter);
+		starRating();
 	}
 };
 

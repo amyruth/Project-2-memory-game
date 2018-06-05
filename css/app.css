@@ -169,130 +169,135 @@ h1 {
 	align-self: center;
 }
 
-
-@media screen and (max-width: 390px){
-	.deck{
-		width:97%
+@media screen and (max-width: 390px) {
+	.deck {
+		width: 97%
 	}
-	.deck .card{
+	.deck .card {
 		height: 60px;
 		width: 60px;
 		margin: 3px;
 	}
-	.score-panel{
+	.score-panel {
 		font-size: 20px;
 	}
-	.time{
-		margin-left: 
-	}
-	.stats{
+	.stats {
 		width: 80%;
 		font-size: 18px;
 		text-align: center;
 	}
 }
 
-@media screen and (min-width: 391px){
-	.deck{
+@media screen and (min-width: 391px) {
+	.deck {
 		width: 100%;
 	}
-	.score-panel{
+	.score-panel {
 		font-size: 24px;
 		display: flex;
 		justify-content: space-evenly;
 		flex-direction: row;
-		align-items: center;	
+		align-items: center;
 	}
-	.deck .card{
+	.deck .card {
 		height: 75px;
 		width: 75px;
 		margin: 3px;
 	}
 }
 
-@media screen and (min-width: 469px){
-	.deck{
+@media screen and (min-width: 469px) {
+	.deck {
 		width: 90%;
 	}
-	.deck .card{
+	.deck .card {
 		height: 80px;
 		width: 80px;
 	}
 }
-@media screen and (min-width: 494px){
-	.deck .card{
+
+@media screen and (min-width: 494px) {
+	.deck .card {
 		height: 85px;
 		width: 85px;
 	}
-	.score-panel{
+	.score-panel {
 		flex-direction: row;
 	}
 }
-@media screen and (min-width: 520px){
-	.deck .card{
+
+@media screen and (min-width: 520px) {
+	.deck .card {
 		height: 95px;
 		width: 95px;
 	}
 }
-@media screen and (min-width: 594px){
-	.deck{
+
+@media screen and (min-width: 594px) {
+	.deck {
 		width: 90%;
 	}
-	.deck .card{
+	.deck .card {
 		height: 110px;
 		width: 110px;
 	}
 }
-@media screen and (min-width: 645px){
-	.deck .card{
+
+@media screen and (min-width: 645px) {
+	.deck .card {
 		height: 115px;
 		width: 115px;
 	}
 }
-@media screen and (min-width: 669px){
-	.deck .card{
+
+@media screen and (min-width: 669px) {
+	.deck .card {
 		height: 120px;
 		width: 120px;
 	}
 }
-@media screen and (min-width: 694px){
-	.deck .card{
+
+@media screen and (min-width: 694px) {
+	.deck .card {
 		height: 125px;
 		width: 125px;
 	}
 }
-@media screen and (min-width: 719px){
-	.modal-bg{
+
+@media screen and (min-width: 719px) {
+	.modal-bg {
 		bottom: 0;
 	}
-	.deck{
+	.deck {
 		width: 90%;
 	}
-	.deck .card{
+	.deck .card {
 		height: 135px;
 		width: 135px;
 	}
 }
-@media screen and (min-width: 800px){
-	.deck .card{
+
+@media screen and (min-width: 800px) {
+	.deck .card {
 		height: 135px;
 		width: 135px;
 	}
 }
-@media screen and (min-width: 855px){
-	.deck .card{
+
+@media screen and (min-width: 855px) {
+	.deck .card {
 		height: 140px;
 		width: 140px;
 		margin: 5px;
 	}
-	header h1{
+	header h1 {
 		margin: 10px auto;
 	}
-	.container{
+	.container {
 		width: 750px;
 		margin: 0 auto;
 	}
-	.modal-content{
+	.modal-content {
 		width: 650px;
 		margin: 0 auto;
 	}
