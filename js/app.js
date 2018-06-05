@@ -44,7 +44,7 @@ function makeNewCards(cardDeck) {
 		frag.appendChild(li);
 	});
 	return frag;
-};
+}
 
 function captureCards(card, cardList) {
 	if (cardList.length <= 2 && !card.classList.contains('show')) {
@@ -60,7 +60,7 @@ function captureCards(card, cardList) {
 			compareCards(cardList);
 		}, 1000);
 	}
-};
+}
 
 function compareCards(cardList) {
 	let search = cardList[0].innerHTML;
@@ -83,7 +83,7 @@ function compareCards(cardList) {
 	}
 
 	setTimeout(function () {
-		deck.style.pointerEvents = 'auto';;
+		deck.style.pointerEvents = 'auto';
 	}, 200);
 
 	//stops timer and launches win modal
@@ -98,7 +98,7 @@ function compareCards(cardList) {
 		}, 1500);
 
 	}
-};
+}
 
 function addListener(cardHand) {
 	if (cardHand.length === 2) {
@@ -107,13 +107,13 @@ function addListener(cardHand) {
 		let clickedCard = this;
 		captureCards(clickedCard, openCards);
 	}
-};
+}
 
 function cardListener(deck) {
 	deck.querySelectorAll('li').forEach(function (card) {
 		card.addEventListener('click', addListener, false);
 	});
-};
+}
 
 // ###### SCORE BOARD FUNCTIONS ######
 
@@ -121,7 +121,7 @@ function starRating() {
 	let star = document.querySelector('.stars');
 	star.firstElementChild.remove();
 	starsRemaining--;
-};
+}
 
 function replaceStars() {
 	let starCount = stars.querySelectorAll('li').length;
@@ -144,7 +144,7 @@ function displayMoves(cardlist) {
 	if (moveCounter === 8 || moveCounter === 16) {
 		starRating();
 	}
-};
+}
 
 function gameTime() {
 	time.innerHTML = `${minutes} min ${seconds} sec`;
@@ -153,11 +153,11 @@ function gameTime() {
 		minutes++;
 		seconds = 1;
 	}
-};
+}
 
 function stopTime(interval) {
 	clearInterval(interval);
-};
+}
 
 function finalStars() {
 	let starCount = stars.childElementCount;
@@ -167,7 +167,7 @@ function finalStars() {
 		frag.appendChild(icon);
 	}
 	endStars.appendChild(frag);
-};
+}
 
 //removes old cards, resets counters to defaults, recreates decks and lays new board, stops and restarts timer.
 function newBoard() {
@@ -191,7 +191,7 @@ function newBoard() {
 	cardListener(deck, openCards);
 	stopTime(gameInterval);
 	gameInterval = setInterval(gameTime, 1000);
-};
+}
 
 
 //click handler for the reset button
