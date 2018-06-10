@@ -211,15 +211,17 @@ h1 {
 		width: 90%;
 	}
 	.deck .card {
-		height: 80px;
-		width: 80px;
+		height: 75px;
+		width: 75px;
+		margin: 5px;
 	}
 }
 
 @media screen and (min-width: 494px) {
 	.deck .card {
-		height: 85px;
-		width: 85px;
+		height: 75px;
+		width: 75px;
+		margin: 5px;
 	}
 	.score-panel {
 		flex-direction: row;
@@ -228,8 +230,9 @@ h1 {
 
 @media screen and (min-width: 520px) {
 	.deck .card {
-		height: 95px;
-		width: 95px;
+		height: 80px;
+		width: 80px;
+		margin: 10px;
 	}
 }
 
@@ -238,29 +241,33 @@ h1 {
 		width: 90%;
 	}
 	.deck .card {
-		height: 110px;
-		width: 110px;
+		height: 95px;
+		width: 95px;
+		margin: 5px;
 	}
 }
 
 @media screen and (min-width: 645px) {
 	.deck .card {
-		height: 115px;
-		width: 115px;
+		height: 100px;
+		width: 100px;
+		margin: 10px
 	}
 }
 
 @media screen and (min-width: 669px) {
 	.deck .card {
-		height: 120px;
-		width: 120px;
+		height: 100px;
+		width: 110px;
+		margin: 10px;
 	}
 }
 
 @media screen and (min-width: 694px) {
 	.deck .card {
-		height: 125px;
-		width: 125px;
+		height: 115px;
+		width: 115px;
+		margin: 10px;
 	}
 }
 
@@ -272,8 +279,9 @@ h1 {
 		width: 90%;
 	}
 	.deck .card {
-		height: 135px;
-		width: 135px;
+		height: 125px;
+		width: 125px;
+		margin: 10px;
 	}
 }
 
@@ -286,9 +294,9 @@ h1 {
 
 @media screen and (min-width: 855px) {
 	.deck .card {
-		height: 140px;
-		width: 140px;
-		margin: 5px;
+		height: 120px;
+		width: 120px;
+		margin: 10px;
 	}
 	header h1 {
 		margin: 10px auto;

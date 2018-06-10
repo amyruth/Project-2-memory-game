@@ -69,7 +69,7 @@ function compareCards(cardList) {
 			card.classList.add('match', 'tada');
 			card.removeEventListener('click', addListener, false);
 			card.classList.remove('flipInY');
-			// console.log('match'); 
+			// console.log('match');
 		});
 		matches++;
 		cardList.length = 0;
@@ -94,7 +94,6 @@ function compareCards(cardList) {
 			totalMoves.textContent = `Moves Made: ${moves.textContent}`;
 			finalStars();
 			modal.style.display = 'flex';
-			modal.classList.add('fadeInDown');
 		}, 1500);
 
 	}
