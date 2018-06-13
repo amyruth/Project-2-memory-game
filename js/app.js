@@ -192,7 +192,6 @@ function newBoard() {
 	gameInterval = setInterval(gameTime, 1000);
 }
 
-
 //click handler for the reset button
 resetButton.addEventListener('click', function () {
 	if (openCards.length !== 0) {
