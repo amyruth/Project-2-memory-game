@@ -28,7 +28,7 @@ https://youtu.be/gLWIYk0Sd38
 
 Click a card. Click another card. If they match, the cards will turn green and stay visible. If they don't match, the cards are turned over again. Game is complete when all 16 cards have been matched.
 
-To play a new game, click 'Play Again' on the win page or the reset button to the top right of the game board.
+To play a new game, click 'Play Again' on the win page or the reset button to the top right of the game board. Or click the score box to close it without restarting the game.
 
 ## Scoring
 Every 8 moves you will lose a star. No biggie, nobody's perfect!
