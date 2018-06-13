@@ -17,7 +17,7 @@ let finalTime = document.querySelector('.finalTime');
 let totalMoves = document.querySelector('.totalMoves');
 let endStars = document.querySelector('.starRating');
 let modalButton = document.querySelector('.exit');
-
+const modalContent = document.querySelector('.modal-content');
 // ###### CARD FUNCTIONS ######
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -202,6 +202,10 @@ resetButton.addEventListener('click', function () {
 });
 
 modalButton.addEventListener('click', newBoard, false);
+
+modalContent.addEventListener('click', function() {
+    modal.style.display = 'none';
+})
 
 //when page loads for the first time a new board is created
 window.onload = newBoard();
