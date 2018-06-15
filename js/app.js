@@ -18,6 +18,7 @@ let totalMoves = document.querySelector('.totalMoves');
 let endStars = document.querySelector('.starRating');
 let modalButton = document.querySelector('.exit');
 const modalContent = document.querySelector('.modal-content');
+
 // ###### CARD FUNCTIONS ######
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -46,7 +47,23 @@ function makeNewCards(cardDeck) {
 	return frag;
 }
 
+function cardListener(deck) {
+	deck.querySelectorAll('li').forEach(function (card) {
+		card.addEventListener('click', addListener, false);
+	});
+}
+
+function addListener(cardHand) {
+	if (cardHand.length === 2) {
+		return;
+	} else {
+		let clickedCard = this;
+		captureCards(clickedCard, openCards);
+	}
+}
+
 function captureCards(card, cardList) {
+	//makes sure flipped card isn't readded and only 2 cards in array
 	if (cardList.length <= 2 && !card.classList.contains('show')) {
 		card.classList.add('show', 'open', 'flipInY');
 		cardList.push(card);
@@ -64,6 +81,8 @@ function captureCards(card, cardList) {
 
 function compareCards(cardList) {
 	let search = cardList[0].innerHTML;
+	//compares the i tag of both cards for a match
+	//if they match, click listener is removed
 	if (cardList[1].innerHTML.indexOf(search) !== -1) {
 		cardList.forEach(function (card) {
 			card.classList.add('match', 'tada');
@@ -72,6 +91,7 @@ function compareCards(cardList) {
 			// console.log('match');
 		});
 		matches++;
+		//empties the array
 		cardList.length = 0;
 		// console.log(`matches ${matches}`);
 	} else {
@@ -99,40 +119,7 @@ function compareCards(cardList) {
 	}
 }
 
-function addListener(cardHand) {
-	if (cardHand.length === 2) {
-		return;
-	} else {
-		let clickedCard = this;
-		captureCards(clickedCard, openCards);
-	}
-}
-
-function cardListener(deck) {
-	deck.querySelectorAll('li').forEach(function (card) {
-		card.addEventListener('click', addListener, false);
-	});
-}
-
 // ###### SCORE BOARD FUNCTIONS ######
-
-function starRating() {
-	let star = document.querySelector('.stars');
-	star.firstElementChild.remove();
-	starsRemaining--;
-}
-
-function replaceStars() {
-	let starCount = stars.querySelectorAll('li').length;
-	for (let i = starCount; i <= 2; i++) {
-		let li = document.createElement('li');
-		let starIcon = document.createElement('i');
-		starIcon.classList.add('fa', 'fa-star');
-		li.appendChild(starIcon);
-		frag.appendChild(li);
-	};
-	stars.appendChild(frag);
-}
 
 //2 open cards = 1 move
 function displayMoves(cardlist) {
@@ -143,6 +130,38 @@ function displayMoves(cardlist) {
 	if (moveCounter === 8 || moveCounter === 16) {
 		starRating();
 	}
+}
+
+function finalStars() {
+	let starCount = stars.childElementCount;
+	for (let i = 1; i <= starCount; i++) {
+		let icon = document.createElement('i');
+		icon.classList.add('fa', 'fa-star');
+		frag.appendChild(icon);
+	}
+	endStars.appendChild(frag);
+}
+
+function starRating() {
+	let star = document.querySelector('.stars');
+	star.firstElementChild.remove();
+	starsRemaining--;
+}
+
+// Since there will always be at least one star left on the screen, this loop runs until i = 3 and stops itself, replacing all 3 stars on the screen.
+// If there's 1 star, it runs twice = 3 stars
+// if there's 2 stars, it runs once then i = 3 it stops, still 3 stars
+// It's pretty neat and I'm suprised my dumb self came up with something so clever, so I'm writing my logic down for the future.
+function replaceStars() {
+	let starCount = stars.querySelectorAll('li').length;
+	for (let i = starCount; i <= 2; i++) {
+		let li = document.createElement('li');
+		let starIcon = document.createElement('i');
+		starIcon.classList.add('fa', 'fa-star');
+		li.appendChild(starIcon);
+		frag.appendChild(li);
+	};
+	stars.appendChild(frag);
 }
 
 function gameTime() {
@@ -156,16 +175,6 @@ function gameTime() {
 
 function stopTime(interval) {
 	clearInterval(interval);
-}
-
-function finalStars() {
-	let starCount = stars.childElementCount;
-	for (let i = 1; i <= starCount; i++) {
-		let icon = document.createElement('i');
-		icon.classList.add('fa', 'fa-star');
-		frag.appendChild(icon);
-	}
-	endStars.appendChild(frag);
 }
 
 //removes old cards, resets counters to defaults, recreates decks and lays new board, stops and restarts timer.
@@ -192,7 +201,9 @@ function newBoard() {
 	gameInterval = setInterval(gameTime, 1000);
 }
 
-//click handler for the reset button
+//when page loads for the first time a new board is created
+window.onload = newBoard();
+
 resetButton.addEventListener('click', function () {
 	if (openCards.length !== 0) {
 		openCards.length = 0;
@@ -206,5 +217,3 @@ modalContent.addEventListener('click', function() {
     modal.style.display = 'none';
 })
 
-//when page loads for the first time a new board is created
-window.onload = newBoard();
