@@ -160,7 +160,7 @@ function replaceStars() {
 		starIcon.classList.add('fa', 'fa-star');
 		li.appendChild(starIcon);
 		frag.appendChild(li);
-	};
+	}
 	stars.appendChild(frag);
 }
 
@@ -181,7 +181,7 @@ function stopTime(interval) {
 function newBoard() {
 	while (deck.firstChild) {
 		deck.removeChild(deck.firstChild);
-	};
+	}
 	moveCounter = 0;
 	moves.textContent = 0;
 	matches = 0;
@@ -213,7 +213,6 @@ resetButton.addEventListener('click', function () {
 
 modalButton.addEventListener('click', newBoard, false);
 
-modalContent.addEventListener('click', function() {
-    modal.style.display = 'none';
-})
-
+modalContent.addEventListener('click', function () {
+	modal.style.display = 'none';
+});
