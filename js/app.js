@@ -1,22 +1,23 @@
+(function() {
 const cards = ['fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o', 'fa fa-leaf', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-bicycle', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-paper-plane-o'];
-let deck = document.querySelector('.deck');
-let resetButton = document.querySelector('.restart');
+const deck = document.querySelector('.deck');
+const resetButton = document.querySelector('.restart');
 let openCards = [];
-let frag = document.createDocumentFragment();
+const frag = document.createDocumentFragment();
 let moveCounter = 0;
-let moves = document.querySelector('.moves');
+const moves = document.querySelector('.moves');
 let matches = 0;
 let starsRemaining = 3;
-let stars = document.querySelector('.stars');
-let time = document.querySelector('.time');
+const stars = document.querySelector('.stars');
+const time = document.querySelector('.time');
 let minutes = 0;
 let seconds = 1;
 let gameInterval;
-let modal = document.querySelector('.modal-bg');
-let finalTime = document.querySelector('.finalTime');
-let totalMoves = document.querySelector('.totalMoves');
-let endStars = document.querySelector('.starRating');
-let modalButton = document.querySelector('.exit');
+const modal = document.querySelector('.modal-bg');
+const finalTime = document.querySelector('.finalTime');
+const totalMoves = document.querySelector('.totalMoves');
+const endStars = document.querySelector('.starRating');
+const modalButton = document.querySelector('.exit');
 const modalContent = document.querySelector('.modal-content');
 
 // ###### CARD FUNCTIONS ######
@@ -216,3 +217,4 @@ modalButton.addEventListener('click', newBoard, false);
 modalContent.addEventListener('click', function () {
 	modal.style.display = 'none';
 });
+})();
